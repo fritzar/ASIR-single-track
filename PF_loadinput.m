@@ -179,11 +179,11 @@ plot(xy_P(1,:),xy_P(4,:),'bp-')
 axis([0,axisX,0,axisY])
 hold on;grid on;
 plot(x(1,:),x(3,:),'ko-')
-title('跟踪结果')
+title('一次跟踪结果')
 xlabel('x方向距离')
 ylabel('y方向距离')
 legend('估计点迹','真实点迹')
-set(gcf,'Position',[100 100 260 220]);
+set(gcf,'Position',[100 100 500 400]);
 set(gca,'Position',[.13 .17 .80 .74]);
 figure_FontSize=8;
 set(get(gca,'XLabel'),'FontSize',figure_FontSize,'Vertical','top');
@@ -231,14 +231,14 @@ set(findobj(get(gca,'Children'),'LineWidth',0.5),'LineWidth',2);
 % legend('估计轨迹','真实轨迹')
 % 
 %% 
-figure(5)
+figure(6)
 plot(error_P(:,1,Np_i),'^-');
 title('各帧均方误差')
 % axis([0,Total_time,0,1])
 xlabel('时间/帧')
 ylabel('均方误差')
 grid on
-set(gcf,'Position',[100 100 260 220]);
+set(gcf,'Position',[100 100 500 400]);
 set(gca,'Position',[.13 .17 .80 .74]);
 figure_FontSize=8;
 set(get(gca,'XLabel'),'FontSize',figure_FontSize,'Vertical','top');

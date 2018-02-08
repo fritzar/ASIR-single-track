@@ -21,6 +21,7 @@ E_target_state_MC=zeros(7,Total_time);
 %% ============== PF implementation ================
 Pre_T_particle=zeros(7,Total_time,Np);            % Pre_track particles
 Pre_track_Z=zeros(1,Np);
+w=zeros(1,Np);
 
 % Pre_weight0=zeros(Np,Total_time);               % Particles weights of Pre-track PF
 % Pre_weight=zeros(Np,Total_time);                % Normalized Particles weights
@@ -68,11 +69,11 @@ for t = 1:Total_time
                 Pre_track_Z(i)=Detection_frame(Z_y_index,Z_x_index);
                 Pre_T_particle(7,t,i)=Detection_frame(Z_y_index,Z_x_index); %该粒子（样本）处的观测值
                 %% Gaussian likelihood ratio
-                u(i)=exp(0.5*(2*Detection_frame(Z_y_index,Z_x_index)*A-A^2));
+                w(i)=exp(0.5*(2*Detection_frame(Z_y_index,Z_x_index)*A-A^2));
             else
-                u(i)=0;
+                w(i)=0;
             end
-            u=u./sum(u);
+            w=w./sum(w);
         end
         Pre_T_particle(7,t,:)=1;
         
@@ -81,7 +82,7 @@ for t = 1:Total_time
         %% PF iteration
         %% === sample index funciton: Resampling
         
-        [index_sample]=Sample_index(u); %只要i_j
+        [index_sample]=Sample_index(w); %只要i_j
         
         for j=1:Np % 6%
             
@@ -94,12 +95,11 @@ for t = 1:Total_time
                 %                 Pre_T_life_quality(j)=Pre_T_life_quality(j)+Detection_frame(Z_y_index,Z_x_index);
                 Pre_T_particle(7,t,j)=Detection_frame(Z_y_index,Z_x_index); %该粒子（样本）处的观测值
                 % Gaussian likelihood ratio
-                w(j)=(exp(0.5*(2*Detection_frame(Z_y_index,Z_x_index)*A-A^2)))/u(index_sample(j)); % w_aux=w/u
+                w(j)=w(j)*(exp(0.5*(2*Detection_frame(Z_y_index,Z_x_index)*A-A^2)))/w(index_sample(j)); % 由于不是SIR每一步重采样的1/N权重,故上一步权重不可省略。
             else
                 w(j)=0;
             end
         end
-        
         
         w=w./sum(w);
         
