@@ -15,10 +15,10 @@ numY = length(ypart); %取长度
 numX = length(xpart);
 Sigma_noise = 1; %
 SNR = [9]; %
-NpN = 200; %粒子数变化
+NpN =50; %粒子数变化
 %Np = 1000;
 T_step = 1; % The size of the time cell:Time_step
-q1 = 0.0015; %"空间过程噪声加速度的功率谱密度 ?
+q1 = 0.0015; %"空间过程噪声加速度的功率谱密度 
 
 F = [1 T_step 0 0 %状态转移矩阵
     0   1    0 0
@@ -162,8 +162,8 @@ for Np_i = 1:length(NpN)
                 %     pause
             end
             
-            [E_target_state]=standard_ASIR(Np,initx,Re_x,Re_y,numX,numY,Total_time,xy_data,Sigma_noise,A,F,Q);
-            %F、Q为纯粹粒子滤波KP加上的
+            [E_target_state]=standard_SIR(Np,initx,Re_x,Re_y,numX,numY,Total_time,xy_data,Sigma_noise,A,F,Q);
+            %F、Q为纯粹粒子滤波KP加上的zx
             E_target(:,:,monte_i,snr_i,Np_i) = E_target_state;
         end
 Target_p_error(:,:,snr_i,Np_i) = (squeeze(E_target(1,:,:,snr_i,Np_i))-repmat(x(1,:),Monte,1)').^2 + (squeeze(E_target(4,:,:,snr_i,Np_i))-repmat(x(3,:),Monte,1)').^2; %T*Np*length(SNR)

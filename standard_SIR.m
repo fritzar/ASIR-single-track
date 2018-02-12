@@ -8,8 +8,8 @@ T_step=1;          % The size of the time cell:Time_step
 q1=0.002;          % q1,q2 the level of process noise in target motion
 
 %% ---------- initial distribution of target state
-delta_p=0.1;  % the stardard deviation of the inital distribution of position
-new_velocity_Variance=0.01;             % standard deviation;
+delta_p=0.5;  % the stardard deviation of the inital distribution of position
+new_velocity_Variance=0.1;             % standard deviation;
 % q2=2;                  % q2 the measurement noise
 
 %% ---------- Rao-blackwellision parameters
