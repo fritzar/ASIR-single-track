@@ -3,7 +3,7 @@ clc
 close all
 format long;
 L = 0; %？
-Monte = 50;
+Monte = 100;
 axisX = 30; %50%x轴最大值
 axisY = 30;%50
 Total_time = 20;%40
@@ -15,7 +15,7 @@ numY = length(ypart); %取长度
 numX = length(xpart);
 Sigma_noise = 1; %
 SNR = [9]; %
-NpN =50; %粒子数变化
+NpN =500; %粒子数变化
 %Np = 1000;
 T_step = 1; % The size of the time cell:Time_step
 q1 = 0.0015; %"空间过程噪声加速度的功率谱密度 

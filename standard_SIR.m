@@ -50,11 +50,11 @@ for t = 1:Total_time
         index_vy=initx(4)/Re_y;
         % -------generate the new partitions of particles
         %--------generate position based the detection measurements
-        position_x_p=repmat(index_x,Np,1)+delta_p*randn(Np,1);
-        position_y_p=repmat(index_y,Np,1)+delta_p*randn(Np,1);
+%         position_x_p=repmat(index_x,Np,1)+delta_p*randn(Np,1);
+%         position_y_p=repmat(index_y,Np,1)+delta_p*randn(Np,1);
         %% --------初始粒子均匀分布
-%         position_x_p = random('unif',1,10,Np,1);
-%         position_y_p = random('unif',1,10,Np,1);       
+        position_x_p = random('unif',1,10,Np,1);
+        position_y_p = random('unif',1,10,Np,1);       
         %% --------generate velocity based on the detections
         velocity_x_p=repmat(index_vx,Np,1);
         velocity_y_p=repmat(index_vy,Np,1);
